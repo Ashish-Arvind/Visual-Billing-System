@@ -1,6 +1,6 @@
 # 🧾 Visual Billing System with Object Detection
 
-This project is a smart billing system that uses **YOLOv8 object detection** via webcam to identify real-world items and automatically generate a bill with pricing.
+A smart billing system that uses **YOLOv8 object detection** via webcam to identify real-world items and automatically generate a bill with pricing.
 
 ### 📸 Features
 - Real-time object detection using YOLOv8
@@ -8,7 +8,6 @@ This project is a smart billing system that uses **YOLOv8 object detection** via
 - Quantity counting based on detection frequency
 - Bill generation from a CSV price list
 - Interactive, responsive HTML bill with:
-  - Logo
   - Payment method buttons
   - Print to PDF
 - Flask backend with HTML/CSS frontend
