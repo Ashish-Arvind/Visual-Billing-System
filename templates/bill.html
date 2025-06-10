@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Bill</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding-top: 50px;
+        }
+
+        .logo-print {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: auto;
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 70%;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .payment-btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background-color: #6c757d;
+            color: white;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .payment-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button-container button,
+        .button-container .btn-restart {
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-restart {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .btn-restart:hover {
+            background-color: #138496;
+        }
+
+        .btn-print {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-print:hover {
+            background-color: #e0a800;
+        }
+
+        @media print {
+            .button-container,
+            .no-print {
+                display: none !important;
+            }
+            .logo-print {
+                display: block;
+            }
+            body {
+                background-color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ✅ Logo in top-right corner -->
+    <img src="{{ url_for('static', filename='title_slide_image_1.png') }}" class="logo-print" alt="Logo">
+
+    <h1>Your Bill</h1>
+
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Subtotal</th>
+        </tr>
+        {% for item, details in bill.items() %}
+        <tr>
+            <td>{{ item }}</td>
+            <td>{{ details.qty }}</td>
+            <td>${{ details.price }}</td>
+            <td>${{ details.qty * details.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Total: ${{ total }}</h2>
+
+    <!-- ✅ Payment Options -->
+    <div class="no-print">
+        <h3>Payment Options</h3>
+        <ul>
+            <li><button class="payment-btn">Cash</button></li>
+            <li><button class="payment-btn">Card</button></li>
+            <li><button class="payment-btn">UPI</button></li>
+        </ul>
+    </div>
+
+    <!-- ✅ Control Buttons -->
+    <div class="button-container">
+        <form action="/" method="get" style="display: inline;">
+            <button type="submit" class="btn-restart">🔄 Restart Scanner</button>
+        </form>
+        <button onclick="window.print()" class="btn-print">🖨️ Print as PDF</button>
+    </div>
+</body>
+</html>
