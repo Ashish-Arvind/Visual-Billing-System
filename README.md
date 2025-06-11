@@ -14,9 +14,9 @@ A smart billing system that uses **YOLOv8 object detection** via webcam to ident
 
 ---
 
-### 🚀 How to Run
+### How to Run
 
-#### 📦 1. Install dependencies
+#### 1. Install dependencies
 
 ```bash
 pip install -r requirements.txt
